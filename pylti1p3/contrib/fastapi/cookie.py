@@ -13,7 +13,7 @@ class FastAPICookieService(CookieService):
         return self._cookie_prefix + "-" + key
 
     def get_cookie(self, name):
-        return self._request.cookies.get(self._get_key(name))
+        return self._request.get_cookie(self._get_key(name))
 
     def set_cookie(self, name, value, exp=3600):
         self._cookie_data_to_set[self._get_key(name)] = {
@@ -22,7 +22,7 @@ class FastAPICookieService(CookieService):
         }
 
     def update_response(self, response):
-        is_secure = self._request.url.is_secure
+        is_secure = self._request.is_secure()
         for key, cookie_data in self._cookie_data_to_set.items():
             cookie_kwargs = {
                 "key": key,
