@@ -293,9 +293,9 @@ class ResourceLinkBase(TestLinkBase):
 
     def _get_data_with_invalid_message(self, *args):  # pylint: disable=unused-argument
         message_launch_data = self.expected_message_launch_data.copy()
-        message_launch_data[
-            "https://purl.imsglobal.org/spec/lti/claim/version"
-        ] = "1.2.0"
+        message_launch_data["https://purl.imsglobal.org/spec/lti/claim/version"] = (
+            "1.2.0"
+        )
         return message_launch_data
 
     def test_res_link_launch_invalid_nonce(self):
