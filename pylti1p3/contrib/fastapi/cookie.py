@@ -31,6 +31,7 @@ class FastAPICookieService(CookieService):
                 "secure": is_secure,
                 "path": "/",
                 "httponly": True,
+                "samesite": None,
             }
             if is_secure:
                 cookie_kwargs["samesite"] = "None"
