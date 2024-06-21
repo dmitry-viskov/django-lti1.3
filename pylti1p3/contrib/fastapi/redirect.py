@@ -13,7 +13,7 @@ class FastAPIRedirect(Redirect):
         self._cookie_service = cookie_service
 
     def do_redirect(self):
-        return self._process_response(RedirectResponse(self._location))
+        return self._process_response(RedirectResponse(self._location, status_code=302))
 
     def do_js_redirect(self):
         return self._process_response(

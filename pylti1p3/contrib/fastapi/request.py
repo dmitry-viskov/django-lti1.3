@@ -5,7 +5,7 @@ class FastAPIRequest(Request):
     _request = None
     _form_data = None
 
-    def __init__(self, request, form_data=None):
+    def __init__(self, request, form_data):
         """
         Parameters:
             request: FastAPI request
@@ -17,7 +17,7 @@ class FastAPIRequest(Request):
         super().__init__()
 
         self._request = request
-        self._form_data = form_data or {}
+        self._form_data = form_data
 
     @property
     def session(self):
