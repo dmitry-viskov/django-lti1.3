@@ -132,7 +132,8 @@ class ServiceConnector:
         if link_header:
             match = re.search(
                 r'<([^>]*)>;\s*rel="next"',
-                link_header.replace("\n", " ").lower().strip(),
+                link_header.replace("\n", " ").strip(),
+                re.IGNORECASE
             )
             if match:
                 next_page_url = match.group(1)
