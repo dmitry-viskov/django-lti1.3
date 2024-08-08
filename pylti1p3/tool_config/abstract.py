@@ -39,14 +39,14 @@ class ToolConfAbstract(t.Generic[REQ]):
         return iss_type == IssuerToClientRelation.MANY_CLIENTS_IDS_PER_ISSUER
 
     def set_iss_has_one_client(self, iss: str):
-        self.issuers_relation_types[
-            iss
-        ] = IssuerToClientRelation.ONE_CLIENT_ID_PER_ISSUER
+        self.issuers_relation_types[iss] = (
+            IssuerToClientRelation.ONE_CLIENT_ID_PER_ISSUER
+        )
 
     def set_iss_has_many_clients(self, iss: str):
-        self.issuers_relation_types[
-            iss
-        ] = IssuerToClientRelation.MANY_CLIENTS_IDS_PER_ISSUER
+        self.issuers_relation_types[iss] = (
+            IssuerToClientRelation.MANY_CLIENTS_IDS_PER_ISSUER
+        )
 
     def find_registration(self, iss: str, *args, **kwargs) -> Registration:
         """

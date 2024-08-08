@@ -1,7 +1,7 @@
 from pylti1p3.cookie import CookieService
 
 
-class FlaskCookieService(CookieService):
+class FastAPICookieService(CookieService):
     _request = None
     _cookie_data_to_set = None
 
@@ -16,19 +16,23 @@ class FlaskCookieService(CookieService):
         return self._request.get_cookie(self._get_key(name))
 
     def set_cookie(self, name, value, exp=3600):
-        self._cookie_data_to_set[self._get_key(name)] = {"value": value, "exp": exp}
+        self._cookie_data_to_set[self._get_key(name)] = {
+            "value": value,
+            "exp": exp,
+        }
 
     def update_response(self, response):
+        is_secure = self._request.is_secure()
         for key, cookie_data in self._cookie_data_to_set.items():
             cookie_kwargs = {
                 "key": key,
                 "value": cookie_data["value"],
                 "max_age": cookie_data["exp"],
-                "secure": self._request.is_secure(),
+                "secure": is_secure,
                 "path": "/",
                 "httponly": True,
+                "samesite": None,
             }
-
-            if self._request.is_secure():
+            if is_secure:
                 cookie_kwargs["samesite"] = "None"
             response.set_cookie(**cookie_kwargs)
