@@ -67,7 +67,7 @@ class NamesRolesProvisioningService:
         data_body = t.cast(t.Any, data.get("body", {}))
         return data_body.get("members", []), data["next_page_url"]
 
-    def get_members(self, resource_link_id: t.Optional[str] = None) -> t.List[TMember]:
+    def get_members(self, resource_link_id: t.Optional[str] = None, role: t.Optional[str] = None) -> t.List[TMember]:
         """
         Get list with all users.
 
@@ -79,6 +79,9 @@ class NamesRolesProvisioningService:
 
         if members_url and resource_link_id:
             members_url = add_param_to_url(members_url, "rlid", resource_link_id)
+        
+        if members_url and role:
+            members_url = add_param_to_url(members_url, "role", role)
 
         while members_url:
             members, members_url = self.get_members_page(members_url)
